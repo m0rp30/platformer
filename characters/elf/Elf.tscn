@@ -1,0 +1,50 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://characters/elf/elf_walk (1).png" type="Texture" id=1]
+[ext_resource path="res://characters/elf/elf_walk (2).png" type="Texture" id=2]
+[ext_resource path="res://characters/elf/elf_walk (4).png" type="Texture" id=3]
+[ext_resource path="res://characters/elf/elf_walk (3).png" type="Texture" id=4]
+[ext_resource path="res://characters/elf/Elf.gd" type="Script" id=5]
+[ext_resource path="res://characters/elf/elf_dead.png" type="Texture" id=6]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "dead",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "walk",
+"speed": 12.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 5.62639, 11.0641 )
+
+[node name="Elf" type="KinematicBody2D" groups=[
+"Enemy",
+]]
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -0.46167, -4.93597 )
+frames = SubResource( 1 )
+animation = "dead"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2( 5.01198, -0.128513 )
+enabled = true
+cast_to = Vector2( 0, 12 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

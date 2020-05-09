@@ -30,19 +30,9 @@ animations = [ {
 "name": "fall",
 "speed": 0.0
 }, {
-"frames": [ ExtResource( 1 ) ],
-"loop": false,
-"name": "jump",
-"speed": 0.0
-}, {
 "frames": [ ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 6 ) ],
 "loop": true,
 "name": "run",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 12 ), ExtResource( 14 ), ExtResource( 16 ) ],
-"loop": false,
-"name": "punch",
 "speed": 12.0
 }, {
 "frames": [ ExtResource( 10 ), ExtResource( 8 ), ExtResource( 11 ), ExtResource( 9 ) ],
@@ -50,9 +40,19 @@ animations = [ {
 "name": "slash",
 "speed": 12.0
 }, {
+"frames": [ ExtResource( 1 ) ],
+"loop": false,
+"name": "jump",
+"speed": 0.0
+}, {
 "frames": [ ExtResource( 17 ), ExtResource( 15 ), ExtResource( 13 ) ],
 "loop": false,
 "name": "hit",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 14 ), ExtResource( 16 ) ],
+"loop": false,
+"name": "punch",
 "speed": 12.0
 } ]
 
@@ -61,6 +61,7 @@ radius = 7.00943
 height = 9.1798
 
 [node name="King" type="KinematicBody2D"]
+z_index = 1
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
@@ -76,4 +77,12 @@ shape = SubResource( 2 )
 
 [node name="Position2D" type="Position2D" parent="."]
 position = Vector2( 13, 0 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+limit_left = 0
+limit_bottom = 180
+smoothing_enabled = true
+smoothing_speed = 3.0
+editor_draw_limits = true
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]

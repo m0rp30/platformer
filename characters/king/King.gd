@@ -2,7 +2,8 @@ extends KinematicBody2D
 
 const GRAVITY = 10
 const FLOOR = Vector2(0, -1)
-const FIREBALL = preload("res://weapons/fireball/Fireball.tscn")
+#const FIREBALL = preload("res://weapons/fireball/Fireball.tscn")
+const FIREBALL = preload("res://weapons/white_fireball/White_fireball.tscn")
 
 export var speed = 75
 export var jump_power = 250

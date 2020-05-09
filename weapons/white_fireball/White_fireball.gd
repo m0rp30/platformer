@@ -22,7 +22,7 @@ func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
 
 
-func _on_Fireball_body_entered(body):
+func _on_White_fireball_body_entered(body):
 	if body.is_in_group("Enemy"):
 		print(body)
 		body.dead()

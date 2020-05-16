@@ -3,7 +3,8 @@ extends Area2D
 const SPEED = 100
 
 var velocity = Vector2()
-var direction = 1 # 1 Right, -1 Left
+var direction = 1
+var weapon_power = 1
 
 
 func set_fireball_direction(dir):
@@ -24,6 +25,5 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 func _on_White_fireball_body_entered(body):
 	if body.is_in_group("Enemy"):
-		print(body)
-		body.dead()
+		body.dead(weapon_power)
 	queue_free()

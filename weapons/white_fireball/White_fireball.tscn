@@ -17,9 +17,6 @@ radius = 5.06082
 
 [node name="White_fireball" type="Area2D"]
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -3.06282, 0 )
@@ -28,10 +25,12 @@ animation = "shoot"
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource( 2 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-position = Vector2( -0.543261, -0.134335 )
-scale = Vector2( 0.548044, 0.48953 )
+visible = false
+position = Vector2( -2.07467, -0.314896 )
+scale = Vector2( 1.04508, 0.83149 )
 [connection signal="body_entered" from="." to="." method="_on_White_fireball_body_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

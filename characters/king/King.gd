@@ -1,6 +1,5 @@
 extends KinematicBody2D
 
-const GRAVITY = 10
 const FLOOR = Vector2(0, -1)
 const FIREBALLRED = preload("res://weapons/fireball/Fireball.tscn")
 const FIREBALLWHITE = preload("res://weapons/white_fireball/White_fireball.tscn")
@@ -8,6 +7,8 @@ const FIREBALLWHITE = preload("res://weapons/white_fireball/White_fireball.tscn"
 export var speed = 75
 export var jump_power = 250
 
+var on_ladder = false
+var gravity = 10
 var velocity = Vector2()
 var on_ground = false
 var is_attacking = false
@@ -17,7 +18,6 @@ var weapon_power = 1
 
 # warning-ignore:unused_argument
 func _physics_process(delta):
-	
 	if is_dead == false:
 		if Input.is_action_pressed("ui_right"):
 			if is_attacking == false || is_on_floor() == false:
@@ -47,7 +47,23 @@ func _physics_process(delta):
 					velocity.y = -jump_power
 					on_ground = false
 		
-		if Input.is_action_just_pressed("ui_accept") && is_attacking == false:
+		if on_ladder == true:
+			# Salire e scendere scalette
+			gravity = 0
+			if velocity.y < 0:
+				$AnimatedSprite.play("ladder")
+			
+			if Input.is_action_pressed("ui_up"):
+				velocity.y = -speed
+			elif Input.is_action_pressed("ui_down"):
+				if on_ground == false:
+					velocity.y = speed
+			else:
+				velocity.y = 0
+		else:
+			gravity = 10
+		
+		if Input.is_action_just_pressed("ui_select") && is_attacking == false:
 			if is_on_floor():
 				velocity.x = 0
 			is_attacking = true
@@ -65,8 +81,8 @@ func _physics_process(delta):
 			
 			get_parent().add_child(fireball)
 			fireball.position = $Position2D.global_position
-	
-		velocity.y +=  GRAVITY
+
+		velocity.y += gravity
 	
 		if is_on_floor():
 			if on_ground == false:
@@ -76,9 +92,15 @@ func _physics_process(delta):
 			if is_attacking == false:
 				on_ground = false
 				if velocity.y < 0:
-					$AnimatedSprite.play("jump")
+					if on_ladder == false:
+						$AnimatedSprite.play("jump")
+					elif on_ladder == true:
+						$AnimatedSprite.play("ladder")
 				else:
-					$AnimatedSprite.play("fall")
+					if on_ladder == false:
+						$AnimatedSprite.play("fall")
+					elif on_ladder == true:
+						$AnimatedSprite.play("ladder")
 	
 		velocity = move_and_slide(velocity, FLOOR)
 		
@@ -86,7 +108,6 @@ func _physics_process(delta):
 			for i in range(get_slide_count()):
 				if get_slide_collision(i).collider.is_in_group("Enemy"):
 					dead()
-
 
 func dead():
 	is_dead = true

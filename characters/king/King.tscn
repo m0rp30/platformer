@@ -26,15 +26,15 @@ animations = [ {
 "name": "idle",
 "speed": 0.0
 }, {
-"frames": [ ExtResource( 17 ), ExtResource( 18 ) ],
-"loop": true,
-"name": "dead",
-"speed": 12.0
-}, {
 "frames": [ ExtResource( 7 ) ],
 "loop": false,
 "name": "fall",
 "speed": 0.0
+}, {
+"frames": [ ExtResource( 17 ), ExtResource( 18 ) ],
+"loop": true,
+"name": "dead",
+"speed": 12.0
 }, {
 "frames": [ ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 6 ) ],
 "loop": true,
@@ -89,7 +89,7 @@ position = Vector2( 13, 0 )
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 limit_left = 0
-limit_bottom = 180
+limit_bottom = 440
 smoothing_enabled = true
 smoothing_speed = 3.0
 editor_draw_limits = true

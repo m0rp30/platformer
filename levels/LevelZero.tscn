@@ -218,6 +218,7 @@ position = Vector2( 17.2246, 88.8354 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 369.806, 74.2789 )
 frames = SubResource( 14 )
+frame = 2
 playing = true
 __meta__ = {
 "_edit_group_": true

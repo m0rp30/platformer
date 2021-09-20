@@ -59,6 +59,7 @@ func _physics_process(delta):
 				if on_ground == false:
 					velocity.y = speed
 			else:
+				$AnimatedSprite.play("idle")
 				velocity.y = 0
 		else:
 			gravity = 10
